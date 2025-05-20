@@ -3,20 +3,15 @@ from langchain_ollama import ChatOllama
 
 from langchain_community.tools.tavily_search.tool import TavilySearchResults
 from langchain_community.tools.gmail import GmailSearch
+from langchain_community.tools.gmail.utils import (
+    get_gmail_credentials,
+    build_resource_service
+)
 
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.prebuilt import create_react_agent
 
 LLM_MODEL = "llama3.2"
-
-import dotenv
-import os
-
-dotenv.load_dotenv()
-
-os.environ["LANGSMITH_API_KEY"] = dotenv.dotenv_values()["LANGSMITH_API_KEY"]
-os.environ["LANGSMITH_TRACING"] = dotenv.dotenv_values()["LANGSMITH_TRACING"]
-os.environ["LANGSMITH_PROJECT"] = dotenv.dotenv_values()["LANGSMITH_PROJECT"]
 
 # create agent
 model = ChatOllama(model=LLM_MODEL)
@@ -30,12 +25,19 @@ search = TavilySearchResults(
             max_results=2
         )
 
+
+creds = get_gmail_credentials(client_secrets_file="credentials.json")
+
+resource = build_resource_service(credentials=creds)
+
+
 gmail = GmailSearch(
             description=(
                             "Use this tool to search for email messages or threads."
                             " The input must be a valid Gmail query."
                             " The output is a JSON list of the requested resource."
-                        )           
+                        ),
+            api_resource=resource
         )
 
 tools = [search, gmail]
