@@ -1,3 +1,7 @@
+# first agent framework try out
+## tool calling practice: 2 tool functions
+## 
+
 from smolagents import (
     CodeAgent # this agent will generate code for tool calls then parse and execute
     , DuckDuckGoSearchTool # web search tool
