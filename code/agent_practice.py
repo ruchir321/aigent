@@ -22,6 +22,7 @@ agent = CodeAgent(
     tools=[], # it only needs to code to perform data analysis
     model=model,
     additional_authorized_imports=["numpy", "pandas", "matplotlib.pyplot", "seaborn"], # to let it use data science-related libraries
+    # executor_type="e2b" # safer to use sandbox
 )
 
 additional_notes = open("data/california-housing/data_description.txt","r").read()
