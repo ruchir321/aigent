@@ -42,3 +42,12 @@ Agents that use code to take actions.
 [CodeAct](https://arxiv.org/pdf/2402.01030) og paper: integrates fine tuned Llama2 and Mistral LLM with python interpreter to write code on the fly
 
 Earlier agents acted on Text or JSON format which specifies tool name and arguements, which the system must parse to determine which tool to use
+
+
+
+
+## practice
+
+1. recommender agent: query recommendations for favourite episodes. E.g:
+   * ("Search for the top episode recommendations for The Office Series where Dwight Schrute is the protagonist.")
+2. 
