@@ -50,4 +50,5 @@ Earlier agents acted on Text or JSON format which specifies tool name and arguem
 
 1. recommender agent: query recommendations for favourite episodes. E.g:
    * ("Search for the top episode recommendations for The Office Series where Dwight Schrute is the protagonist.")
-2. 
+2. property manager assistant: AI property manager chatbot for residents.
+   1. Simulate a use case for a resident query bot (generate scenario from GPT)
