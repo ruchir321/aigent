@@ -49,4 +49,5 @@ def route(input: str, routes: Dict[str, str]) -> str:
 
     # Process input with selected specialized prompts
     selected_prompt = routes[route_key]
+    return llm_call(prompt=f"{selected_prompt}\nInput: {input}")
 

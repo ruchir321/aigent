@@ -9,9 +9,11 @@ os.environ["LANGSMITH_API_KEY"] = dotenv.dotenv_values()["LANGSMITH_API_KEY"]
 os.environ["LANGSMITH_TRACING"] = dotenv.dotenv_values()["LANGSMITH_TRACING"]
 os.environ["LANGSMITH_PROJECT"] = dotenv.dotenv_values()["LANGSMITH_PROJECT"]
 
+SYSTEM_PROMPT = "short and concise answers"
+
 client = Client(host="http://localhost:11434")
 
-def llm_call(prompt: str, system_prompt: str = "", model="gemma3:4b") -> str:
+def llm_call(prompt: str, system_prompt: str = SYSTEM_PROMPT, model="qwen3:0.6b") -> str:
     """
     Calls the model with the given prompt and returns the response
     """
@@ -30,6 +32,7 @@ def llm_call(prompt: str, system_prompt: str = "", model="gemma3:4b") -> str:
     response = chat(
         model=model,
         messages=messages,
+
         options={
             # "num_keep": 5,
             # "seed": 42,
@@ -39,7 +42,7 @@ def llm_call(prompt: str, system_prompt: str = "", model="gemma3:4b") -> str:
             # "min_p": 0.0,
             # "typical_p": 0.7,
             # "repeat_last_n": 33,
-            "temperature": 0.1
+            "temperature": 0.5
             # "repeat_penalty": 1.2,
             # "presence_penalty": 1.5,
             # "frequency_penalty": 1.0,
