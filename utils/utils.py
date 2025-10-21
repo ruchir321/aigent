@@ -3,12 +3,6 @@ import dotenv
 import os
 from ollama import Client, chat, list
 
-dotenv.load_dotenv()
-
-os.environ["LANGSMITH_API_KEY"] = dotenv.dotenv_values()["LANGSMITH_API_KEY"]
-os.environ["LANGSMITH_TRACING"] = dotenv.dotenv_values()["LANGSMITH_TRACING"]
-os.environ["LANGSMITH_PROJECT"] = dotenv.dotenv_values()["LANGSMITH_PROJECT"]
-
 SYSTEM_PROMPT = "short and concise answers"
 
 client = Client(host="http://localhost:11434")
