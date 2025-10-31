@@ -2,14 +2,14 @@
 
 ## Practice
 
-- [ ] aircraft classification
+- [x] aircraft classification
     - [x] upload jpeg image
     - [x] ident make and model
-    - [ ] technical specs JSON response
+    - [x] technical specs JSON response
         - [x] define pydantic model schema
-        - [ ] wikipedia search for aircraft specifications
-        - [ ] save json response
-        - [ ] save json as pandas dataframe
+        - [x] google search for aircraft specifications
+        - [x] save json response
+        - [x] save json as pandas dataframe
     
 
 
