@@ -1,6 +1,6 @@
-# aigent
+# google-genai python sdk
 
-ai agent 101
+google-genai api has generous RPM, TPM, RPD limits, enough for practicing building AI apps
 
 ## Big idea
 
@@ -14,11 +14,9 @@ REason -->  ACT
 
 ## Tech stack
 
-Langchain (wrapper for everything AI)
+LLM: gemini-2.5-flash
 
-LLM: gemma3:4b
-
-Tool: Brave Search
+Framework library: Langchain (good for learning and MVP)
 
 ### Tool
 
