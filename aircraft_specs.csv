@@ -1,0 +1,9 @@
+image_file,aircraft_name,crew,length,wingspan,height,max_takeoff_weight,max_speed,ferry_range,service_ceiling,g_limit,thrust_weight
+f15stike_eagle.jpg,McDonnell Douglas F-15 Eagle (F-15C),1,19.43,13.05,5.63,30845,2655,5550,19812,9.0,1.55
+su57_su30.jpg,Sukhoi Su-57 (NATO reporting name: Felon),1,20.1,14.1,4.6,35000,2135,4500,20000,9.0,0.87
+MIG29K.jpg,Mikoyan MiG-29K (Fulcrum-D),1,17.3,11.99,4.4,24500,2200,3000,17500,8.0,0.97
+SukhoiSu30MKI.jpg,Sukhoi Su-30MKI,2,21.935,14.7,6.36,38800,2120,8000,17300,9.0,0.96
+f14tomcat.jpg,Grumman F-14 Tomcat,2,19.1,19.55,4.88,33720,2485,2960,15200,6.5,0.73
+MIG21Bis.jpg,Mikoyan-Gurevich MiG-21 (NATO reporting name: Fishbed),1,14.5,7.154,4.125,9800,2175,1670,19000,8.5,0.79
+TejasALCA.jpg,HAL Tejas,1,13.2,8.2,4.4,13500,1975,3200,16500,9.0,1.07
+RafaleB.jpg,Dassault Rafale,2,15.3,10.9,5.3,24500,2470,3700,15240,9.0,1.13
