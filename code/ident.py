@@ -8,17 +8,17 @@ import os
 class AircraftSpecs(BaseModel):
     # General characteristics
     crew: int = Field(default=1, description="""Number of crew members in the cockpit""")
-    length: float = Field(default=None, description="""Length of the aircraft measured from nosetip to tail""", decimal_places=2)
-    wingspan: float = Field(default=None, description="""Measurement between both wingtips of the aircraft""", decimal_places=2)
-    height: float = Field(default=None, description="""Height measured from the belly to the tail tip""", decimal_places=2)
-    max_takeoff_weight: float = Field(default=None, description=""""Maximum allowed takeoff weight""", decimal_places=2)
+    length: float = Field(default=None, description="""Length in meters of the aircraft measured from nosetip to tail""")
+    wingspan: float = Field(default=None, description="""Measurement in meters between both wingtips of the aircraft""")
+    height: float = Field(default=None, description="""Height in meters measured from the belly to the tail tip""")
+    max_takeoff_weight: float = Field(default=None, description=""""Maximum allowed takeoff weight in kilograms""")
 
     # Performance characteristics
-    max_speed: float = Field(default=None, description="""Maximum allowed speed """, decimal_places=2)
-    ferry_range: float = Field(default=None, description="""Maximum ferry range with or without drop tanks if not supported""", decimal_places=2)
-    service_ceiling: float = Field(default=None, description="""Maximum altitude acheived""", decimal_places=2)
-    g_limit: float = Field(default=None, description="""Maximum g force tolerated by fuselage""", decimal_places=2)
-    thrust_weight: float = Field(default=None, description="""Thrust to weight ratio measured with empty weight""", decimal_places=2)
+    max_speed: float = Field(default=None, description="""Maximum allowed speed in km/h""")
+    ferry_range: float = Field(default=None, description="""Maximum ferry range in kilometers with or without drop tanks if not supported""")
+    service_ceiling: float = Field(default=None, description="""Maximum altitude acheived in meters""")
+    g_limit: float = Field(default=None, description="""Maximum g force tolerated by fuselage""")
+    thrust_weight: float = Field(default=None, description="""Thrust to weight ratio measured with empty weight""")
                            
 
 
@@ -26,9 +26,10 @@ dotenv.load_dotenv()
 
 GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
 MODEL_CHECKPOINT = "gemini-2.5-flash"
+SYSTEM_INSTRUCTION = "You are an information retrieval tool meant to populate the fields of AircraftSpecs class with the help of Google Search. You are not allowed to respond with sentences, only structured output is allowed."
 
 # img = "images/MIG29K.jpg"
-img = "images/TejasALCA.jpg"
+img = "images/RafaleB.jpg"
 img_mime_type = "image/jpeg"
 
 with open(img, 'rb') as f:
@@ -39,7 +40,17 @@ client = genai.Client(
     http_options=types.HttpOptions(api_version="v1alpha")
 )
 
-# TODO: Wikipedia langchain wrapper tryout
+websearch_tool = types.Tool(
+    google_search=types.GoogleSearch()
+)
+
+config = types.GenerateContentConfig(
+    system_instruction=SYSTEM_INSTRUCTION,
+    temperature=0,
+    tools=[websearch_tool],
+    response_mime_type='application/json',
+    response_schema=AircraftSpecs
+)
 
 contents = [
     types.Content(
@@ -49,14 +60,15 @@ contents = [
                 data=img_bytes,
                 mime_type=img_mime_type
             ),
-            types.Part.from_text(text="Identify the fighter jet manufacturer and model in the image")
+            types.Part.from_text(text="Identify the fighter jet and give me the required information.")
         ]
     )
 ]
 
 response = client.models.generate_content(
     model=MODEL_CHECKPOINT,
-    contents=contents
+    contents=contents,
+    config=config
 )
 
 print(response.text)
